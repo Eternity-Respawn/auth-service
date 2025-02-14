@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-oauth-tokens-table
+      author: Bohdan Hovorukha
+      changes:
+        - createTable:
+            tableName: oauth_tokens
+            columns:
+              - column:
+                  name: access_token
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: refresh_token
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: service
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    references: users(id)
+                    foreignKeyName: fk_oauth_tokens_user_id
+                    nullable: false
