@@ -1,8 +1,6 @@
 package dev.eternity.respawn.authservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -13,6 +11,9 @@ public class OauthToken {
     private String accessToken;
     private String refreshToken;
     private Service service;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     private enum Service {
         GOOGLE,
