@@ -28,3 +28,13 @@ databaseChangeLog:
                   type: VARCHAR(255)
                   constraints:
                     nullable: false
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: registration_type
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
