@@ -1,9 +1,9 @@
 package dev.eternity.respawn.authservice.controller;
 
-import dev.eternity.respawn.authservice.dto.UserLoginRequestDto;
-import dev.eternity.respawn.authservice.dto.UserRegistrationRequestDto;
-import dev.eternity.respawn.authservice.dto.UserRegistrationResponseDto;
-import dev.eternity.respawn.authservice.dto.UserResponseDto;
+import dev.eternity.respawn.authservice.dto.User.UserLoginRequestDto;
+import dev.eternity.respawn.authservice.dto.User.UserRegistrationRequestDto;
+import dev.eternity.respawn.authservice.dto.User.UserRegistrationResponseDto;
+import dev.eternity.respawn.authservice.dto.User.UserResponseDto;
 import dev.eternity.respawn.authservice.security.AuthenticationService;
 import dev.eternity.respawn.authservice.service.OauthService;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package dev.eternity.respawn.authservice.service;
 
-import dev.eternity.respawn.authservice.dto.UserResponseDto;
+import dev.eternity.respawn.authservice.dto.User.UserResponseDto;
 
 import java.io.IOException;
 import java.util.List;

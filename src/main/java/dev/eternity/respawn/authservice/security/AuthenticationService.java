@@ -1,7 +1,7 @@
 package dev.eternity.respawn.authservice.security;
 
-import dev.eternity.respawn.authservice.dto.UserLoginRequestDto;
-import dev.eternity.respawn.authservice.dto.UserResponseDto;
+import dev.eternity.respawn.authservice.dto.User.UserLoginRequestDto;
+import dev.eternity.respawn.authservice.dto.User.UserResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

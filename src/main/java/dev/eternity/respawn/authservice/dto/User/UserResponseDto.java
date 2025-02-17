@@ -1,4 +1,4 @@
-package dev.eternity.respawn.authservice.dto;
+package dev.eternity.respawn.authservice.dto.User;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
