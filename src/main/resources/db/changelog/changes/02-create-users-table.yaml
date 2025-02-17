@@ -38,3 +38,10 @@ databaseChangeLog:
                   type: VARCHAR(255)
                   constraints:
                     nullable: false
+              - column:
+                  name: role_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    references: roles(id)
+                    foreignKeyName: fk_users_role_id

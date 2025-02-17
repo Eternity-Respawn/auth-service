@@ -33,10 +33,13 @@ public class User implements UserDetails {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     @Column(name = "registration_type", nullable = false)
     private RegistrationType registrationType;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return List.of(role);
     }
 
     @Override

@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
         String encodedPassword = passwordEncoder.encode(requestDto.getPassword());
         User user = userMapper.toModel(requestDto);
         user.setPassword(encodedPassword);
+        user.setRegistrationType(User.RegistrationType.FORM);
 
         return userMapper.toDto(userRepository.save(user));
     }

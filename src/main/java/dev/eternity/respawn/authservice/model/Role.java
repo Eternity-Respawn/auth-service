@@ -1,0 +1,30 @@
+package dev.eternity.respawn.authservice.model;
+
+import jakarta.persistence.*;
+import lombok.Data;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+import org.springframework.security.core.GrantedAuthority;
+
+@Data
+@Entity
+@Table(name = "roles")
+public class Role implements GrantedAuthority {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    @Column(name = "role_name", nullable = false, unique = true)
+    private RoleName roleName;
+
+    @Override
+    public String getAuthority() {
+        return "ROLE_" + roleName.name();
+    }
+
+    public enum RoleName {
+        ADMIN,
+        USER,
+        RECRUITER
+    }
+}
