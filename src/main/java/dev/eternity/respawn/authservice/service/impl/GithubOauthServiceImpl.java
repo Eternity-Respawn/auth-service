@@ -1,8 +1,6 @@
 package dev.eternity.respawn.authservice.service.impl;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import dev.eternity.respawn.authservice.dto.Github.GithubEmailDto;
@@ -26,6 +24,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -119,10 +118,10 @@ public class GithubOauthServiceImpl implements OauthService {
                 profileInfo.body(), GithubResponseDto.class
         );
 
-        return saveUser(userProfile, headerValue);
+        return getOrRegisterUser(userProfile, headerValue);
     }
 
-    private User saveUser(GithubResponseDto userProfile, String headerValue)
+    private User getOrRegisterUser(GithubResponseDto userProfile, String headerValue)
             throws IOException, InterruptedException {
         String email = userProfile.getEmail();
 
@@ -141,14 +140,7 @@ public class GithubOauthServiceImpl implements OauthService {
             email = findPrimaryEmail(userEmails);
         }
 
-        User user = new User()
-                .setFirstName(userProfile.getName())
-                .setLastName("")
-                .setEmail(email)
-                .setPassword(passwordEncoder.encode(UUID.randomUUID().toString()))
-                .setRegistrationType(User.RegistrationType.GITHUB);
-
-        return userRepository.save(user);
+        return resolveUser(userProfile.getName(), email);
     }
 
     private HttpRequest generateUserProfileGetRequest(String path, String headerValue) {
@@ -166,5 +158,22 @@ public class GithubOauthServiceImpl implements OauthService {
         }
 
         return "";
+    }
+
+    private User resolveUser(String name, String email) {
+        Optional<User> userOptional = userRepository.findByEmail(email);
+
+        if (userOptional.isPresent()) {
+            return userOptional.get();
+        }
+
+        User user = new User()
+                .setFirstName(name)
+                .setLastName("")
+                .setEmail(email)
+                .setPassword(passwordEncoder.encode(UUID.randomUUID().toString()))
+                .setRegistrationType(User.RegistrationType.GITHUB);
+
+        return userRepository.save(user);
     }
 }
