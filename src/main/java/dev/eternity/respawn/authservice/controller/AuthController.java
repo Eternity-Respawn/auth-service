@@ -6,6 +6,7 @@ import dev.eternity.respawn.authservice.dto.User.UserRegistrationResponseDto;
 import dev.eternity.respawn.authservice.dto.User.UserResponseDto;
 import dev.eternity.respawn.authservice.security.AuthenticationService;
 import dev.eternity.respawn.authservice.service.OauthService;
+import dev.eternity.respawn.authservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
@@ -22,12 +23,13 @@ public class AuthController {
             = "http://localhost:8080/api/auth/oauth2/code/github";
     private final OauthService githubOauthServiceImpl;
     private final AuthenticationService authenticationService;
+    private final UserService userService;
 
     @PostMapping("/register")
     public UserRegistrationResponseDto register(
             @RequestBody UserRegistrationRequestDto requestDto
     ) {
-        return null;
+        return userService.register(requestDto);
     }
 
     @PostMapping("/login")
