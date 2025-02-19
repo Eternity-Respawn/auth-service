@@ -7,6 +7,7 @@ import dev.eternity.respawn.authservice.dto.User.UserResponseDto;
 import dev.eternity.respawn.authservice.security.AuthenticationService;
 import dev.eternity.respawn.authservice.service.OauthService;
 import dev.eternity.respawn.authservice.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
@@ -27,13 +28,13 @@ public class AuthController {
 
     @PostMapping("/register")
     public UserRegistrationResponseDto register(
-            @RequestBody UserRegistrationRequestDto requestDto
+            @RequestBody @Valid UserRegistrationRequestDto requestDto
     ) {
         return userService.register(requestDto);
     }
 
     @PostMapping("/login")
-    public UserResponseDto login(@RequestBody UserLoginRequestDto requestDto) {
+    public UserResponseDto login(@RequestBody @Valid UserLoginRequestDto requestDto) {
         return authenticationService.authenticate(requestDto);
     }
 

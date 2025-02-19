@@ -19,8 +19,6 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     private static final String REGISTRATION_EXCEPTION_MESSAGE_TEMPLATE
             = "User with email: %s is already exists";
-    private static final String INVALID_ROLE_EXCEPTION_TEMPLATE
-            = "Can't find role: %s";
     private static final String ADMIN_ROLE_EXCEPTION_TEMPLATE
             = "You can't register an account with type: ADMIN";
 
@@ -36,12 +34,7 @@ public class UserServiceImpl implements UserService {
 
         validateRequest(email, roleName);
 
-        Role role = roleRepository.findByRoleName(roleName).orElseThrow(
-                () -> new InvalidRoleException(String.format(
-                        INVALID_ROLE_EXCEPTION_TEMPLATE, roleName
-                ))
-        );
-
+        Role role = roleRepository.findByRoleName(roleName);
         String encodedPassword = passwordEncoder.encode(requestDto.getPassword());
         User user = userMapper.toModel(requestDto);
         user.setPassword(encodedPassword);

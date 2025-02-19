@@ -6,7 +6,9 @@ import com.google.gson.reflect.TypeToken;
 import dev.eternity.respawn.authservice.dto.Github.GithubEmailDto;
 import dev.eternity.respawn.authservice.dto.Github.GithubResponseDto;
 import dev.eternity.respawn.authservice.dto.User.UserResponseDto;
+import dev.eternity.respawn.authservice.model.Role;
 import dev.eternity.respawn.authservice.model.User;
+import dev.eternity.respawn.authservice.repository.RoleRepository;
 import dev.eternity.respawn.authservice.repository.UserRepository;
 import dev.eternity.respawn.authservice.security.JwtUtil;
 import dev.eternity.respawn.authservice.service.OauthService;
@@ -44,6 +46,7 @@ public class GithubOauthServiceImpl implements OauthService {
     private String secret;
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final JwtUtil jwtUtil;
     private final Gson gson;
     private final PasswordEncoder passwordEncoder;
@@ -167,12 +170,15 @@ public class GithubOauthServiceImpl implements OauthService {
             return userOptional.get();
         }
 
+        Role role = roleRepository.findByRoleName(Role.RoleName.USER);
+
         User user = new User()
                 .setFirstName(name)
                 .setLastName("")
                 .setEmail(email)
                 .setPassword(passwordEncoder.encode(UUID.randomUUID().toString()))
-                .setRegistrationType(User.RegistrationType.GITHUB);
+                .setRegistrationType(User.RegistrationType.GITHUB)
+                .setRole(role);
 
         return userRepository.save(user);
     }
