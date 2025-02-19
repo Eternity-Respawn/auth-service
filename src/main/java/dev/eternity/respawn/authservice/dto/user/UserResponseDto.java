@@ -1,4 +1,4 @@
-package dev.eternity.respawn.authservice.dto.User;
+package dev.eternity.respawn.authservice.dto.user;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -7,5 +7,4 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class UserResponseDto {
     private String accessToken;
-    private String refreshToken;
 }

@@ -1,4 +1,4 @@
-package dev.eternity.respawn.authservice.dto.User;
+package dev.eternity.respawn.authservice.dto.user;
 
 import dev.eternity.respawn.authservice.model.Role;
 import dev.eternity.respawn.authservice.validation.PasswordMatch;

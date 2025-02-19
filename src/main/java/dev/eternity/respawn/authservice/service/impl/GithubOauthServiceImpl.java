@@ -3,21 +3,15 @@ package dev.eternity.respawn.authservice.service.impl;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import dev.eternity.respawn.authservice.dto.Github.GithubEmailDto;
-import dev.eternity.respawn.authservice.dto.Github.GithubResponseDto;
-import dev.eternity.respawn.authservice.dto.User.UserResponseDto;
+import dev.eternity.respawn.authservice.dto.github.GithubEmailDto;
+import dev.eternity.respawn.authservice.dto.github.GithubResponseDto;
+import dev.eternity.respawn.authservice.dto.user.UserResponseDto;
 import dev.eternity.respawn.authservice.model.Role;
 import dev.eternity.respawn.authservice.model.User;
 import dev.eternity.respawn.authservice.repository.RoleRepository;
 import dev.eternity.respawn.authservice.repository.UserRepository;
 import dev.eternity.respawn.authservice.security.JwtUtil;
 import dev.eternity.respawn.authservice.service.OauthService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.web.util.UriComponentsBuilder;
-
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URI;
@@ -28,6 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 @RequiredArgsConstructor
@@ -157,7 +156,9 @@ public class GithubOauthServiceImpl implements OauthService {
 
     private String findPrimaryEmail(List<GithubEmailDto> userEmails) {
         for (GithubEmailDto email: userEmails) {
-            if (email.isPrimary()) return email.getEmail();
+            if (email.isPrimary()) {
+                return email.getEmail();
+            }
         }
 
         return "";

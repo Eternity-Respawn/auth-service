@@ -1,9 +1,8 @@
 package dev.eternity.respawn.authservice.validation;
 
-import dev.eternity.respawn.authservice.dto.User.UserRegistrationRequestDto;
+import dev.eternity.respawn.authservice.dto.user.UserRegistrationRequestDto;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-
 import java.util.Objects;
 
 public class PasswordMatchesValidator implements

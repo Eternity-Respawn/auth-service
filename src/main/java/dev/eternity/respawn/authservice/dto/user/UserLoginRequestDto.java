@@ -1,4 +1,4 @@
-package dev.eternity.respawn.authservice.dto.User;
+package dev.eternity.respawn.authservice.dto.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

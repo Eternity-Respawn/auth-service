@@ -1,4 +1,4 @@
-package dev.eternity.respawn.authservice.dto.Github;
+package dev.eternity.respawn.authservice.dto.github;
 
 import lombok.Data;
 
